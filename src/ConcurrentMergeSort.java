@@ -13,26 +13,11 @@ public class ConcurrentMergeSort {
         int leftIdx = 0;
         int rightIdx = 0;
         for (int i = 0; i < currList.size(); i++) {
+            Integer leftValue = leftIdx < leftSubList.size() ? leftSubList.get(leftIdx) : null;
+            Integer rightValue = rightIdx < rightSubList.size() ? rightSubList.get(rightIdx) : null;
 
-            Integer leftValue = null;
-            if (leftIdx < leftSubList.size()) {
-                leftValue = leftSubList.get(leftIdx);
-            }
-
-            Integer rightValue = null;
-            if (rightIdx < rightSubList.size()) {
-                rightValue = rightSubList.get(rightIdx);
-            }
-
-            // One of the values must be non-null.
-            if (leftValue == null) {
-                assert(rightValue != null);
-                tmp[i] = rightValue;
-                rightIdx++;
-            } else if (rightValue == null) {
-                tmp[i] = leftValue;
-                leftIdx++;
-            } else if (leftValue > rightValue) {
+            // If leftValue is null then rightValue cannot be null.
+            if (leftValue == null || rightValue != null && rightValue < leftValue) {
                 tmp[i] = rightValue;
                 rightIdx++;
             } else {
