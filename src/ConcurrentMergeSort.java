@@ -16,8 +16,9 @@ public class ConcurrentMergeSort {
             Integer leftValue = leftIdx < leftSubList.size() ? leftSubList.get(leftIdx) : null;
             Integer rightValue = rightIdx < rightSubList.size() ? rightSubList.get(rightIdx) : null;
 
-            // If leftValue is null then rightValue cannot be null.
+            // To understand this, remember that condition evaluation is from left to right.
             if (leftValue == null || rightValue != null && rightValue < leftValue) {
+                // If leftValue is null then rightValue cannot be null.
                 tmp[i] = rightValue;
                 rightIdx++;
             } else {
