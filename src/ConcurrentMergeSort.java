@@ -71,13 +71,9 @@ public class ConcurrentMergeSort {
 
         List<Integer> data = Arrays.asList(47, 45, 42, 40, 38, 10, 8, 6, 4, 3, 1, 0, 0, 28, 26, 24, 20, 100, 120, 80);
 
-        ForkJoinPool pool = new ForkJoinPool();
-
-        try {
+        try (var pool = new ForkJoinPool()) {
             var work = new SplitAndMerge(data);
             pool.invoke(work);
-        } finally {
-            pool.shutdown();
         }
     }
 }
